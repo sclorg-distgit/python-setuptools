@@ -2,7 +2,7 @@
 %{!?scl:%global pkg_name %{name}}
 
 %global srcname setuptools
-%global build_wheel 0
+%global build_wheel 1
 # We don't ship pytest nor mock with scls so we don't run the test suite
 %global with_check 0
 
@@ -14,7 +14,7 @@
 
 Name:           %{?scl_prefix}python-setuptools
 Version:        18.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Easily build and distribute Python packages
 
 Group:          Applications/System
@@ -106,7 +106,7 @@ sed -i '/\/usr\/bin\/easy_install,/d' %{buildroot}%{python3_record}
 
 %if 0%{?build_wheel}
 sed -i '/^setuptools\/tests\//d' %{buildroot}%{python3_record}
-cp %{buildroot}%{_bindir}/easy_install-3.4 %{buildroot}%{_bindir}/easy_install
+cp %{buildroot}%{_bindir}/easy_install-3.5 %{buildroot}%{_bindir}/easy_install
 %endif
 
 install -p -m 0644 %{SOURCE1} %{SOURCE2} .
@@ -133,6 +133,9 @@ rm -rf %{buildroot}
 %{_bindir}/easy_install-3.*
 
 %changelog
+* Sat Feb 13 2016 Robert Kuska <rkuska@redhat.com> - 18.0.1-2
+- Rebuild with rewheel
+
 * Sat Feb 13 2016 Robert Kuska <rkuska@redhat.com> - 7.1.0-1
 - Update to 7.1.0 and rebuild for rh-python35
 
