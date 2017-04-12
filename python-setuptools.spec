@@ -5,7 +5,7 @@
 
 Name:           %{?scl_prefix}python-setuptools
 Version:        0.9.8
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Easily build and distribute Python packages
 
 Group:          Applications/System
@@ -23,6 +23,9 @@ Patch1: setuptools-ssl-match_hostname-wildcard.patch
 # Fixes easy_install throwing SSL error when behind HTTPS proxy
 # https://bugzilla.redhat.com/show_bug.cgi?id=1085459
 Patch2: restore-proxy-support-SSL-connection.patch
+# Fix easy_install in FIPS mode
+# https://bugzilla.redhat.com/show_bug.cgi?id=1425141
+Patch3: easy_install-fips-mode.patch
 
 
 BuildRoot:      %{_tmppath}/%{pkg_name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -54,6 +57,7 @@ This package contains the distribute fork of setuptools.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 find -name '*.txt' -exec chmod -x \{\} \;
 find . -name '*.orig' -exec rm \{\} \;
@@ -97,6 +101,10 @@ rm -rf %{buildroot}
 %{_bindir}/easy_install-2.*
 
 %changelog
+* Mon Feb 20 2017 Tomas Orsava <torsava@redhat.com> - 0.9.8-6
+- Fix easy_install in fips mode
+Resolves: rhbz#1425141
+
 * Mon May 18 2015 Matej Stuchlik <mstuchli@redhat.com> - 0.9.8-3
 - Enhance patch restoring proxy support in SSL connections
 Resolves: rhbz#1222507
