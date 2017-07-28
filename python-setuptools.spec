@@ -2,7 +2,7 @@
 %{!?scl:%global pkg_name %{name}}
 
 %global srcname setuptools
-%global build_wheel 0
+%global build_wheel 1
 # We don't ship pytest nor mock with scls so we don't run the test suite
 %global with_check 0
 
@@ -14,7 +14,7 @@
 
 Name:           %{?scl_prefix}python-setuptools
 Version:        36.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Easily build and distribute Python packages
 
 Group:          Applications/System
@@ -133,6 +133,9 @@ rm -rf %{buildroot}
 %{_bindir}/easy_install-3.*
 
 %changelog
+* Wed Jun 14 2017 Iryna Shcherbina <ishcherb@redhat.com> - 36.0.1-2
+- Bootstrapping procedure, step 2/2: build_wheel 1
+
 * Wed Jun 14 2017 Iryna Shcherbina <ishcherb@redhat.com> - 36.0.1-1
 - Update to 36.0.1 and rebuild for rh-python36
 - Bootstrapping procedure, step 1/2: build_wheel 0
