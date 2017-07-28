@@ -2,7 +2,7 @@
 %{!?scl:%global pkg_name %{name}}
 
 %global srcname setuptools
-%global build_wheel 0
+%global build_wheel 1
 # We don't ship pytest nor mock with scls so we don't run the test suite
 %global with_check 0
 
@@ -14,7 +14,7 @@
 
 Name:           %{?scl_prefix}python-setuptools
 Version:        36.0.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Easily build and distribute Python packages
 
 Group:          Applications/System
@@ -133,7 +133,10 @@ rm -rf %{buildroot}
 %{_bindir}/easy_install-3.*
 
 %changelog
-* Wed Jun 14 2017 Charalampos Stratakis <cstratak@redhat.com> - 36.0.1-1
+* Wed Jun 14 2017 Charalampos Stratakis <cstratak@redhat.com> - 36.0.1-3
+- Rebuild as wheel
+
+* Wed Jun 14 2017 Charalampos Stratakis <cstratak@redhat.com> - 36.0.1-2
 - Update to 36.0.1 for rh-python36
 
 * Sat Feb 13 2016 Robert Kuska <rkuska@redhat.com> - 18.0.1-2
