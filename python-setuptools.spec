@@ -13,8 +13,8 @@
 
 
 Name:           %{?scl_prefix}python-setuptools
-Version:        36.0.1
-Release:        3%{?dist}
+Version:        36.2.7
+Release:        1%{?dist}
 Summary:        Easily build and distribute Python packages
 
 Group:          Applications/System
@@ -133,6 +133,10 @@ rm -rf %{buildroot}
 %{_bindir}/easy_install-3.*
 
 %changelog
+* Tue Aug 08 2017 Charalampos Stratakis <cstratak@redhat.com> - 36.2.7-1
+- Update to 36.2.7
+Resolves: rhbz#1478078
+
 * Wed Jun 14 2017 Charalampos Stratakis <cstratak@redhat.com> - 36.0.1-3
 - Rebuild as wheel
 
