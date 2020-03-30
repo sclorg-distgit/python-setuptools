@@ -19,7 +19,7 @@
 Name:           %{?scl_prefix}python-setuptools
 # When updating, update the bundled libraries versions bellow!
 Version:        41.6.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Easily build and distribute Python packages
 # setuptools is MIT
 # packaging is BSD or ASL 2.0
@@ -145,8 +145,8 @@ mkdir -p %{buildroot}%{python_wheeldir}
 install -p dist/%{python_wheelname} -t %{buildroot}%{python_wheeldir}
 %endif
 
-# Remove unversioned easy_install
-rm %{buildroot}%{_bindir}/easy_install
+# SCL: Add a symlink for easy_install-3
+ln -s ./easy_install-%{python3_version} %{buildroot}%{_bindir}/easy_install-3
 %{?scl:EOF}
 
 
@@ -172,6 +172,8 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=$(pwd) pytest-%{python3_version} \
 %{python3_sitelib}/pkg_resources/
 %{python3_sitelib}/setuptools*/
 %{python3_sitelib}/__pycache__/*
+%{_bindir}/easy_install
+%{_bindir}/easy_install-3
 %{_bindir}/easy_install-3.*
 
 %if %{without bootstrap}
@@ -185,6 +187,10 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=$(pwd) pytest-%{python3_version} \
 
 
 %changelog
+* Thu Jan 30 2020 Tomas Orsava <torsava@redhat.com> - 41.6.0-6
+- Add unversioned binaries
+- Resolves: rhbz#1671025
+
 * Wed Jan 22 2020 Tomas Orsava <torsava@redhat.com> - 41.6.0-5
 - Finished bootstrapping
 - Resolves: rhbz#1671025
