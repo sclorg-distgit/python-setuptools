@@ -6,7 +6,7 @@
 
 #  WARNING  When bootstrapping, disable tests as well,
 #           because tests need pip.
-%bcond_without bootstrap
+%bcond_with bootstrap
 # tests permanently turned off due to missing dependencies
 %bcond_with tests
 
@@ -19,7 +19,7 @@
 Name:           %{?scl_prefix}python-setuptools
 # When updating, update the bundled libraries versions bellow!
 Version:        41.6.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Easily build and distribute Python packages
 # setuptools is MIT
 # packaging is BSD or ASL 2.0
@@ -185,6 +185,10 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=$(pwd) pytest-%{python3_version} \
 
 
 %changelog
+* Wed Jan 22 2020 Tomas Orsava <torsava@redhat.com> - 41.6.0-5
+- Finished bootstrapping
+- Resolves: rhbz#1671025
+
 * Wed Jan 22 2020 Tomas Orsava <torsava@redhat.com> - 41.6.0-4.bootstrap
 - Modified the specfile for the rh-python38 RHSCL
 - Start bootstrapping
